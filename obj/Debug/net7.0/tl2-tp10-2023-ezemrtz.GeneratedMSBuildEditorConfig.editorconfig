@@ -9,49 +9,53 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = tl2_tp10_2023_ezemrtz
 build_property.RootNamespace = tl2_tp10_2023_ezemrtz
-build_property.ProjectDir = C:\Users\Alumno\Desktop\tp10tl\tl2-tp10-2023-ezemrtz\
+build_property.ProjectDir = C:\Users\rodri\Desktop\Ezequiel\Facultad\Taller2\TP10\tl2-tp10-2023-ezemrtz\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Alumno\Desktop\tp10tl\tl2-tp10-2023-ezemrtz
+build_property.MSBuildProjectDirectory = C:\Users\rodri\Desktop\Ezequiel\Facultad\Taller2\TP10\tl2-tp10-2023-ezemrtz
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Home/Index.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Home/Privacy.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Shared/Error.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Tablero/GetAllTableros.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFibGVyb1xHZXRBbGxUYWJsZXJvcy5jc2h0bWw=
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Usuario/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGVVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Usuario/GetAllUsers.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xHZXRBbGxVc2Vycy5jc2h0bWw=
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Usuario/DeleteUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xEZWxldGVVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Usuario/Index.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Usuario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/_ViewImports.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Usuario/UpdateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVcGRhdGVVc2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/_ViewStart.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Alumno/Desktop/tp10tl/tl2-tp10-2023-ezemrtz/Views/Shared/_Layout.cshtml]
+[C:/Users/rodri/Desktop/Ezequiel/Facultad/Taller2/TP10/tl2-tp10-2023-ezemrtz/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wl6k3ipv9l

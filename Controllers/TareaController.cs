@@ -6,8 +6,7 @@ using tl2_tp10_2023_ezemrtz.Repositorios;
 
 namespace tl2_tp10_2023_ezemrtz.Controllers;
 
-[ApiController]
-[Route("[controller]")]
+
 public class TareaController : Controller
 {
     private TareaRepository tareaRepository;

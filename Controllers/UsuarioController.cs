@@ -5,8 +5,7 @@ using tl2_tp10_2023_ezemrtz.Repositorios;
 
 
 namespace tl2_tp10_2023_ezemrtz.Controllers;
-[ApiController]
-[Route("[controller]")]
+
 public class UsuarioController : Controller
 {
     private UsuarioRepository usuarioRepository;
@@ -18,25 +17,41 @@ public class UsuarioController : Controller
         usuarioRepository = new UsuarioRepository();
     }
 
-    [HttpPost("api/CrearUsuario")]
+    public IActionResult Index(){
+        var usuarios = usuarioRepository.GetAll();
+        return View(usuarios);
+    }
+
+    [HttpGet]
+    public IActionResult CreateUser(){
+        return View(new Usuario());
+    }
+
+    [HttpPost]
     public IActionResult CreateUser(Usuario usuario){
         usuarioRepository.Create(usuario);
         return RedirectToAction("Index");
     }
+
     [HttpGet]
-    public IActionResult GetAllUsers(){
-        var usuarios = usuarioRepository.GetAll();
-        return View(usuarios);
+    public IActionResult UpdateUser(int idUser){
+        var user = usuarioRepository.Get(idUser);
+        return View(user);
     }
-    [HttpPut("api/ModificarUsuario")]
-    public IActionResult UpdateUser(int idUser, Usuario usuario){
-        usuarioRepository.Update(idUser, usuario);
-        var usuarioModificado = usuarioRepository.Get(idUser);
-        return View(usuarioModificado);
+    [HttpPost]
+    public IActionResult UpdateUser(Usuario usuario){
+        usuarioRepository.Update(usuario.Id,usuario);
+        return RedirectToAction("Index");
     }
-    [HttpDelete("api/EliminarUsuario")]
+
+    [HttpGet]
     public IActionResult DeleteUser(int idUser){
-        usuarioRepository.Remove(idUser);
+        var user = usuarioRepository.Get(idUser);
+        return View(user);
+    }
+    [HttpPost]
+    public IActionResult DeleteUser(Usuario usuario){
+        usuarioRepository.Remove(usuario.Id);
         return RedirectToAction("Index");
     }
 

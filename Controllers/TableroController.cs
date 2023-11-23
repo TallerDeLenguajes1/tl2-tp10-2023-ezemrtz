@@ -5,8 +5,7 @@ using tl2_tp10_2023_ezemrtz.Repositorios;
 
 namespace tl2_tp10_2023_ezemrtz.Controllers;
 
-[ApiController]
-[Route("[controller]")]
+
 public class TableroController : Controller
 {
     private TableroRepository tableroRepository;

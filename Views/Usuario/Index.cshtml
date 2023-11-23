@@ -5,15 +5,17 @@
 @model List<Usuario>
 
 <h2> Lista de Usuarios </h2>
-<table>
+<table class="table table-striped">
     <thead>
         <th>Id</th>
         <th>Nombre</th>
     </thead>
     <tbody>
         @foreach(var usuario in Model){
-            <tr>@usuario.Id</tr>
-            <tr>@usuario.NombreDeUsuario</tr>
+            <tr>
+                <td>@usuario.Id</td>
+                <td>@usuario.NombreDeUsuario</td>
+            </tr>
         }
     </tbody>
 </table>
