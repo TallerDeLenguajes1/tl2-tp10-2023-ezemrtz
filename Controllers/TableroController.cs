@@ -17,25 +17,41 @@ public class TableroController : Controller
         tableroRepository = new TableroRepository();
     }
 
-    [HttpPost("api/CrearTablero")]
+    public IActionResult Index(){
+        var usuarios = tableroRepository.GetAll();
+        return View(usuarios);
+    }
+
+    [HttpGet]
+    public IActionResult CreateTablero(){
+        return View(new Tablero());
+    }
+
+    [HttpPost]
     public IActionResult CreateTablero(Tablero tablero){
         tableroRepository.Create(tablero);
         return RedirectToAction("Index");
     }
-    [HttpGet("api/GetTableros")]
-    public IActionResult GetAllTableros(){
-        var tableros = tableroRepository.GetAll();
-        return View(tableros);
+
+    [HttpGet]
+    public IActionResult UpdateTablero(int id){
+        var tablero = tableroRepository.Get(id);
+        return View(tablero);
     }
-    [HttpPut("api/EditarTablero")]
-    public IActionResult Update(int id,Tablero tablero){
-        tableroRepository.Update(id,tablero);
-        var tableroModificado = tableroRepository.Get(id);
-        return View(tableroModificado);
+    [HttpPost]
+    public IActionResult UpdateTablero(Tablero tablero){
+        tableroRepository.Update(tablero.Id, tablero);
+        return RedirectToAction("Index");
     }
-    [HttpDelete("api/EliminarTablero")]
-    public IActionResult Delete(int id){
-        tableroRepository.Remove(id);
+
+    [HttpGet]
+    public IActionResult DeleteTablero(int id){
+        var tablero = tableroRepository.Get(id);
+        return View(tablero);
+    }
+    [HttpPost]
+    public IActionResult DeleteTablero(Tablero tablero){
+        tableroRepository.Remove(tablero.Id);
         return RedirectToAction("Index");
     }
 

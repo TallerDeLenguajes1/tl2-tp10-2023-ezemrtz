@@ -18,27 +18,41 @@ public class TareaController : Controller
         tareaRepository = new TareaRepository();
     }
 
-    [HttpPost("api/CrearTarea")]
-    public IActionResult CreateTarea(int idTablero, Tarea tarea){
-        tareaRepository.Create(idTablero,tarea);
+    public IActionResult Index(){
+        var tareas = tareaRepository.GetByTablero(1);
+        return View(tareas);
+    }
+
+    [HttpGet]
+    public IActionResult CreateTarea(){
+        return View(new Tarea());
+    }
+
+    [HttpPost]
+    public IActionResult CreateTarea(Tarea tarea){
+        tareaRepository.Create(1,tarea);
         return RedirectToAction("Index");
     }
 
-    [HttpGet("api/tarea/GetTareas")]
-    public IActionResult GetTareaPorTablero(int id){
-        var tareas = tareaRepository.GetByTablero(id);
-        return View(tareas);
-    }
-    [HttpPut("api/ModificarTarea")]
-    public IActionResult UpdateTarea(int id, string nombre){
+    [HttpGet]
+    public IActionResult UpdateTarea(int id){
         var tarea = tareaRepository.Get(id);
-        tarea.Nombre = nombre;
-        tareaRepository.Update(id,tarea);
         return View(tarea);
     }
-    [HttpDelete("api/EliminarTarea")]
+    [HttpPost]
+    public IActionResult UpdateTarea(Tarea tarea){
+        tareaRepository.Update(tarea.Id,tarea);
+        return RedirectToAction("Index");
+    }
+
+    [HttpGet]
     public IActionResult DeleteTarea(int id){
-        tareaRepository.Remove(id);
+        var tarea = tareaRepository.Get(id);
+        return View(tarea);
+    }
+    [HttpPost]
+    public IActionResult DeleteTarea(Tarea tarea){
+        tareaRepository.Remove(tarea.Id);
         return RedirectToAction("Index");
     }
 }
