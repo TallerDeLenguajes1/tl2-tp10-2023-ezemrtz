@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rodri\\Desktop\\Ezequiel\\Facultad\\Taller2\\TP10\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj": {}
+    "C:\\Users\\Alumno\\Desktop\\tp10tl\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rodri\\Desktop\\Ezequiel\\Facultad\\Taller2\\TP10\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj": {
+    "C:\\Users\\Alumno\\Desktop\\tp10tl\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rodri\\Desktop\\Ezequiel\\Facultad\\Taller2\\TP10\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj",
+        "projectUniqueName": "C:\\Users\\Alumno\\Desktop\\tp10tl\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj",
         "projectName": "tl2-tp10-2023-ezemrtz",
-        "projectPath": "C:\\Users\\rodri\\Desktop\\Ezequiel\\Facultad\\Taller2\\TP10\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj",
-        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rodri\\Desktop\\Ezequiel\\Facultad\\Taller2\\TP10\\tl2-tp10-2023-ezemrtz\\obj\\",
+        "projectPath": "C:\\Users\\Alumno\\Desktop\\tp10tl\\tl2-tp10-2023-ezemrtz\\tl2-tp10-2023-ezemrtz.csproj",
+        "packagesPath": "C:\\Users\\Alumno\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alumno\\Desktop\\tp10tl\\tl2-tp10-2023-ezemrtz\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Alumno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -39,6 +41,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "System.Data.SQLite": {
               "target": "Package",
               "version": "[1.0.118, )"
