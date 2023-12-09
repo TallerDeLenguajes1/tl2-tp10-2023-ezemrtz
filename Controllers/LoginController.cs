@@ -24,7 +24,7 @@ public class LoginController : Controller{
         }
 
         [HttpPost] // AQUI VIENE EL LOGIN DEL FORM
-        public IActionResult Login(LoginViewModel usuarioLogueado) //El control este no deberia estar aca? en api haciamos los controles en otro lado
+        public IActionResult Login(LoginViewModel usuarioLogueado) 
         {
             var user = usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == usuarioLogueado.Nombre && u.Contrasenia == usuarioLogueado.Contrasenia);
             if(user == null) return RedirectToAction("Index");

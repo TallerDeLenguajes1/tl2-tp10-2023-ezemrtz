@@ -18,6 +18,7 @@ public class UsuarioController : Controller
     }
 
     public IActionResult Index(){
+        if(HttpContext.Session.GetString("usuario") == null) return RedirectToRoute(new {controller = "Login", action = "Index"});
         var usuarios = usuarioRepository.GetAll();
         return View(usuarios);
     }
