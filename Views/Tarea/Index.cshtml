@@ -13,6 +13,7 @@
         <th>Descripcion</th>
         <th>Color</th>
         <th>Estado</th>
+        <th>Id Usuario Asignado</th>
     </thead>
     <tbody>
         @foreach(var tarea in Model){
@@ -23,6 +24,7 @@
                 <td>@tarea.Descripcion</td>
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
+                <td>@tarea.IdUsuarioAsignado</td>
             </tr>
         }
     </tbody>

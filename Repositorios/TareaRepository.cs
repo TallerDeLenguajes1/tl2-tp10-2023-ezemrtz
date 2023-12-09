@@ -64,7 +64,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
-                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                        tarea.IdUsuarioAsignado = reader["id_usuario_asignado"] != DBNull.Value ? Convert.ToInt32(reader["id_usuario_asignado"]) : (int?)null;
                     }
                 }
                 connection.Close();
@@ -92,7 +92,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
-                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                        tarea.IdUsuarioAsignado = reader["id_usuario_asignado"] != DBNull.Value ? Convert.ToInt32(reader["id_usuario_asignado"]) : (int?)null;
                         tareas.Add(tarea);
                     }
                 }
@@ -121,7 +121,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
-                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                        tarea.IdUsuarioAsignado = reader["id_usuario_asignado"] != DBNull.Value ? Convert.ToInt32(reader["id_usuario_asignado"]) : (int?)null;
                         tareas.Add(tarea);
                     }
                 }
@@ -150,7 +150,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
-                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                        tarea.IdUsuarioAsignado = reader["id_usuario_asignado"] != DBNull.Value ? Convert.ToInt32(reader["id_usuario_asignado"]) : (int?)null;
                         tareas.Add(tarea);
                     }
                 }
