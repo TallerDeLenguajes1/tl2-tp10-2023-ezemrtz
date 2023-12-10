@@ -34,5 +34,8 @@ body {
 
 .tabIndexSection{
   display: flex;
-  row-gap: 10px;
+}
+
+.margin{
+  margin-left: 30px;
 }

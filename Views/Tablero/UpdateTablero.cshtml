@@ -4,11 +4,11 @@
     <form asp-controller="Tablero" asp-action="UpdateTablero" class="formsMVC">
         <div class="form-group mb-3">
             <input asp-for="@Model.Id" hidden/>
-            <label asp-for="@Model.Nombre">Nuevo nombre</label>
+            <label asp-for="@Model.Nombre"></label>
             <input asp-for="@Model.Nombre" class="form-control" />
         </div>
         <div class="form-group mb-3">
-            <label asp-for="@Model.Descripcion">Nueva descripcion</label>
+            <label asp-for="@Model.Descripcion"></label>
             <input asp-for="@Model.Descripcion" class="form-control" />
         </div>
         <div class="form-group mb-3">
@@ -19,3 +19,5 @@
         </div>
     </form>
 </section>
+
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

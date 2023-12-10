@@ -4,19 +4,24 @@
     <form asp-controller="Usuario" asp-action="UpdateUser" class="formsMVC">
         <input asp-for="@Model.Id" hidden>
         <div class="form-group mb-3">
-            <label asp-for="@Model.Nombre">Nombre de usuario</label>
+            <label asp-for="@Model.Nombre"></label>
             <input asp-for="@Model.Nombre" class="form-control" />
+            <span asp-validation-for="@Model.Nombre" class="text-danger"></span>    
         </div>
         <div class="form-group mb-3">
-            <label asp-for="@Model.Contrasenia">Contaseña</label>
+            <label asp-for="@Model.Contrasenia"></label>
             <input asp-for="@Model.Contrasenia" class="form-control" type="password"/>
+            <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>    
         </div>
         <div class="form-group mb-3">
-            <label asp-for="@Model.Rol">Rol</label>
+            <label asp-for="@Model.Rol"></label>
             <select asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
+            <span asp-validation-for="@Model.Rol" class="text-danger"></span>    
         </div>
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </form>
 </section>
+
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

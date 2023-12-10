@@ -25,7 +25,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         }
 
         public void Update(int id, Usuario usuario){
-            var query = $"UPDATE Usuario SET nombre_de_usuario = @name, contrasenia = @password WHERE id = @id";
+            var query = $"UPDATE Usuario SET nombre_de_usuario = @name, contrasenia = @password, rol = @rol WHERE id = @id";
 
             using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
                 connection.Open();
@@ -33,6 +33,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@id", id));
                 command.Parameters.Add(new SQLiteParameter("@name", usuario.NombreDeUsuario));
                 command.Parameters.Add(new SQLiteParameter("@password", usuario.Contrasenia));
+                command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
                 command.ExecuteNonQuery();
                 connection.Close();
             }
