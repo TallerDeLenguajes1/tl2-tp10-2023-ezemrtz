@@ -6,6 +6,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
 {
     public class CrearTableroViewModel
     {
+
         public int IdUsuarioPropietario { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -15,5 +16,6 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             this.Nombre = tablero.Nombre;
             this.Descripcion = tablero.Descripcion;
         }
+        public CrearTableroViewModel(){}
     }
 }

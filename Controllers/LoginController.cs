@@ -23,15 +23,13 @@ public class LoginController : Controller{
             return View(new LoginViewModel());
         }
 
-        [HttpPost] // AQUI VIENE EL LOGIN DEL FORM
+        [HttpPost]
         public IActionResult Login(LoginViewModel usuarioLogueado) 
         {
             var user = usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == usuarioLogueado.Nombre && u.Contrasenia == usuarioLogueado.Contrasenia);
             if(user == null) return RedirectToAction("Index");
             LoguearUsuario(user);
-
             return RedirectToRoute(new{controller = "Home", action = "Index"});
-
         }
 
         private void LoguearUsuario(Usuario usuario){

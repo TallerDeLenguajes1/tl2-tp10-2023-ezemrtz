@@ -7,7 +7,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Este campo es requerido.")]
-        [Display(Name = "Nombre de Usuario")] 
+        [Display(Name = "Usuario")] 
         public string Nombre {get;set;}        
         
         [Required(ErrorMessage = "Este campo es requerido.")]

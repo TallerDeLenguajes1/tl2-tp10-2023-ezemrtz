@@ -85,7 +85,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
             return (tablero);
         }
         public List<Tablero> GetByUser(int idUsuario){
-            var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietaerio = @idUser";
+            var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietario = @idUser";
 
             var tableros = new List<Tablero>();
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))

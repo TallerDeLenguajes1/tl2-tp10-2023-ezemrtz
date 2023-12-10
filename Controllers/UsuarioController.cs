@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using tl2_tp10_2023_ezemrtz.Models;
 using tl2_tp10_2023_ezemrtz.Repositorios;
+using tl2_tp10_2023_ezemrtz.ViewModels;
 
 
 namespace tl2_tp10_2023_ezemrtz.Controllers;
@@ -18,42 +19,53 @@ public class UsuarioController : Controller
     }
 
     public IActionResult Index(){
-        if(HttpContext.Session.GetString("usuario") == null) return RedirectToRoute(new {controller = "Login", action = "Index"});
-        var usuarios = usuarioRepository.GetAll();
-        return View(usuarios);
+        if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+        if(esAdmin()){
+            var usuarios = usuarioRepository.GetAll();
+            return View(new ListarUsuariosViewModel(usuarios));
+        }else{
+            var usuarios = new List<Usuario>();
+            usuarios.Add(usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")));
+            return View(new ListarUsuariosViewModel(usuarios));
+        }
     }
 
     [HttpGet]
     public IActionResult CreateUser(){
-        return View(new Usuario());
+        return View(new CrearUsuarioViewModel());
     }
 
     [HttpPost]
-    public IActionResult CreateUser(Usuario usuario){
-        usuarioRepository.Create(usuario);
+    public IActionResult CreateUser(CrearUsuarioViewModel usuario){
+        usuarioRepository.Create(new Usuario(usuario));
         return RedirectToAction("Index");
     }
 
     [HttpGet]
     public IActionResult UpdateUser(int idUser){
+        if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
         var user = usuarioRepository.Get(idUser);
-        return View(user);
+        return View(new ModificarUsuarioViewModel(user));
     }
     [HttpPost]
-    public IActionResult UpdateUser(Usuario usuario){
-        usuarioRepository.Update(usuario.Id,usuario);
+    public IActionResult UpdateUser(ModificarUsuarioViewModel usuario){
+        if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+        usuarioRepository.Update(usuario.Id,new Usuario(usuario));
         return RedirectToAction("Index");
     }
 
-    [HttpGet]
     public IActionResult DeleteUser(int idUser){
-        var user = usuarioRepository.Get(idUser);
-        return View(user);
-    }
-    [HttpPost]
-    public IActionResult DeleteUser(Usuario usuario){
-        usuarioRepository.Remove(usuario.Id);
+        if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+        usuarioRepository.Remove(idUser);
         return RedirectToAction("Index");
+    }
+
+    private bool logueado(){
+        return HttpContext.Session.Keys.Any();
+    }
+
+    private bool esAdmin(){
+        return HttpContext.Session.Keys.Any() && HttpContext.Session.GetString("rol") == NivelAcceso.administrador.ToString();
     }
 
 }

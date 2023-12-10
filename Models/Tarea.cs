@@ -1,3 +1,5 @@
+using tl2_tp10_2023_ezemrtz.ViewModels;
+
 namespace tl2_tp10_2023_ezemrtz;
 
 
@@ -24,4 +26,24 @@ public class Tarea{
     public string Color { get => color; set => color = value; }
     public EstadoTarea Estado { get => estado; set => estado = value; }
     public int? IdUsuarioAsignado { get => idUsuarioAsignado; set => idUsuarioAsignado = value; }
+
+    public Tarea(){}
+    public Tarea(CrearTareaViewModel tarea){
+        this.IdTablero = tarea.IdTablero;
+        this.Nombre = tarea.Nombre;
+        this.Descripcion = tarea.Descripcion;
+        this.Color = tarea.Color;
+        this.Estado = tarea.Estado;
+        this.IdUsuarioAsignado = tarea.IdUsuarioAsignado;
+    }
+    public Tarea(ModificarTareaViewModel tarea){
+        this.Id = tarea.Id;
+        this.IdTablero = tarea.IdTablero;
+        this.Nombre = tarea.Nombre;
+        this.Descripcion = tarea.Descripcion;
+        this.Color = tarea.Color;
+        this.Estado = tarea.Estado;
+        this.IdUsuarioAsignado = tarea.IdUsuarioAsignado;
+    }
+
 }

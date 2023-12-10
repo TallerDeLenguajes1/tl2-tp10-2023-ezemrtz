@@ -12,13 +12,16 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         public string Color { get; set; }
         public EstadoTarea Estado { get; set; }
         public int? IdUsuarioAsignado { get; set; }
-        public CrearTareaViewModel(Tarea tarea){
+        public List<Usuario> Usuarios { get; set; }
+        public CrearTareaViewModel(Tarea tarea, List<Usuario> usuarios){
             this.IdTablero = tarea.IdTablero;
             this.Nombre = tarea.Nombre;
             this.Descripcion = tarea.Descripcion;
             this.Color = tarea.Color;
             this.Estado = tarea.Estado;
             this.IdUsuarioAsignado = tarea.IdUsuarioAsignado;
+            this.Usuarios = usuarios;
         }
+        public CrearTareaViewModel(){}
     }
 }

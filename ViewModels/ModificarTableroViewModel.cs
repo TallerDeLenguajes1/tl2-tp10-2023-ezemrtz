@@ -17,5 +17,6 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             this.Nombre = tablero.Nombre;
             this.Descripcion = tablero.Descripcion;
         }
+        public ModificarTableroViewModel(){}
     }
 }

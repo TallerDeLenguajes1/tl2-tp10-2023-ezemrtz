@@ -13,7 +13,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         public string Color { get; set; }
         public EstadoTarea Estado { get; set; }
         public int? IdUsuarioAsignado { get; set; }
-        public ModificarTareaViewModel(Tarea tarea){
+        public List<Usuario> Usuarios { get; set; }
+        public ModificarTareaViewModel(Tarea tarea, List<Usuario> usuarios){
             this.Id = tarea.Id;
             this.IdTablero = tarea.IdTablero;
             this.Nombre = tarea.Nombre;
@@ -21,6 +22,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             this.Color = tarea.Color;
             this.Estado = tarea.Estado;
             this.IdUsuarioAsignado = tarea.IdUsuarioAsignado;
+            this.Usuarios = usuarios;
         }
+        public ModificarTareaViewModel(){}
     }
 }

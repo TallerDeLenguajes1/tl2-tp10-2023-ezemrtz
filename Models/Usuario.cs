@@ -1,3 +1,4 @@
+using tl2_tp10_2023_ezemrtz.ViewModels;
 namespace tl2_tp10_2023_ezemrtz;
 
 public enum NivelAcceso{
@@ -14,4 +15,16 @@ public class Usuario{
     public string NombreDeUsuario { get => nombreDeUsuario; set => nombreDeUsuario = value; }
     public string Contrasenia { get => contrasenia; set => contrasenia = value; }
     public NivelAcceso Rol { get => rol; set => rol = value; }
+
+    public Usuario(){}
+    public Usuario(CrearUsuarioViewModel usuario){
+        this.NombreDeUsuario = usuario.Nombre;
+        this.Contrasenia = usuario.Contrasenia;
+        this.Rol = usuario.Rol;
+    }
+    public Usuario(ModificarUsuarioViewModel usuario){
+        this.NombreDeUsuario = usuario.Nombre;
+        this.Contrasenia = usuario.Contrasenia;
+        this.Rol = usuario.Rol;
+    }
 }
