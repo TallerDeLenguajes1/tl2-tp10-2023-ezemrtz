@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 namespace tl2_tp10_2023_ezemrtz.Repositorios{
     public class UsuarioRepository : IUsuarioRepository{
-        private string cadenaConexion = "Data Source=db/kanban.db;Cache=Shared";
+        private readonly string cadenaConexion;
+        public UsuarioRepository(string CadenaDeConexion){
+            this.cadenaConexion = CadenaDeConexion;
+        }
         public void Create(Usuario usuario){
             var query = @"INSERT INTO Usuario (nombre_de_usuario, contrasenia, rol) VALUES (@nombre, @password, @rol);";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -18,9 +21,10 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@password", usuario.Contrasenia));
                 command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
 
-                command.ExecuteNonQuery();
-
+                var filas = command.ExecuteNonQuery();
                 connection.Close();   
+
+                if(filas == 0) throw new Exception("Hubo un problema al crear el usuario");
             }
         }
 
@@ -34,20 +38,23 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@name", usuario.NombreDeUsuario));
                 command.Parameters.Add(new SQLiteParameter("@password", usuario.Contrasenia));
                 command.Parameters.Add(new SQLiteParameter("@rol", usuario.Rol));
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al modificar el usuario");
             }
             
         }
         public List<Usuario> GetAll(){
             var queryString = @"SELECT * FROM Usuario;";
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Usuario> usuarios = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 using(SQLiteDataReader reader = command.ExecuteReader())
                 {
+                    usuarios = new List<Usuario>();
                     while (reader.Read())
                     {
                         var usuario = new Usuario();
@@ -60,14 +67,14 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-            if(usuarios == null) throw new Exception("Usuario no encontrado");
+            if(usuarios == null) throw new Exception("No se encontraron usuarios");
 
             return usuarios;
         }
         public Usuario Get(int id){
             var queryString = "SELECT * FROM Usuario WHERE id = @idUser";
 
-            var usuario = new Usuario();
+            Usuario usuario = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -77,6 +84,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 {
                     while (reader.Read())
                     {
+                        usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(reader["id"]);
                         usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
                         usuario.Contrasenia = reader["contrasenia"].ToString();
@@ -96,8 +104,9 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 command.Parameters.Add(new SQLiteParameter("@idUser", id));
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+                if(filas == 0) throw new Exception("Hubo un problema al eliminar el usuario");
             }
         }
     }

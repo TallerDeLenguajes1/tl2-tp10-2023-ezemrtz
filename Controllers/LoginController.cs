@@ -8,12 +8,12 @@ namespace tl2_tp10_2023_ezemrtz.Controllers;
 
 public class LoginController : Controller{
     private readonly ILogger<LoginController> _logger;
-        private IUsuarioRepository usuarioRepository;
+        private IUsuarioRepository _usuarioRepository;
 
-        public LoginController(ILogger<LoginController> logger)
+        public LoginController(ILogger<LoginController> logger, IUsuarioRepository usuarioRepository)
         {
             _logger = logger;
-            usuarioRepository = new UsuarioRepository();
+            _usuarioRepository = usuarioRepository;
  
         }
 
@@ -29,7 +29,7 @@ public class LoginController : Controller{
             try
             {
                 if(!ModelState.IsValid) return RedirectToAction("Index");
-                var user = usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == usuarioLogueado.Nombre && u.Contrasenia == usuarioLogueado.Contrasenia);
+                var user = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == usuarioLogueado.Nombre && u.Contrasenia == usuarioLogueado.Contrasenia);
                 if(user == null){
                     _logger.LogWarning("Intento de acceso invalido - Usuario: {0} Clave ingresada: {1}", usuarioLogueado.Nombre, usuarioLogueado.Contrasenia);
                     return RedirectToAction("Index");

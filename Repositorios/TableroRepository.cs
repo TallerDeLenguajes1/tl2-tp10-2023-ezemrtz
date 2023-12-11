@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 namespace tl2_tp10_2023_ezemrtz.Repositorios{
     public class TableroRepository : ITableroRepository{
-        private string cadenaConexion = "Data Source=db/kanban.db;Cache=Shared";
+        private readonly string cadenaConexion;
+        public TableroRepository(string CadenaDeConexion){
+            this.cadenaConexion = CadenaDeConexion;
+        }
         public void Create(Tablero tablero){
             var query = $"INSERT INTO Tablero (id_usuario_propietario, nombre, descripcion) VALUES (@idUser, @nombre, @descripcion)";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -18,9 +21,10 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
                 command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
 
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
+                connection.Close();  
 
-                connection.Close();   
+                if(filas == 0) throw new Exception("Hubo un problema al crear el tablero");
             }
         }
         public void Update(int id, Tablero tablero){
@@ -33,19 +37,22 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@nombre", tablero.Nombre));
                 command.Parameters.Add(new SQLiteParameter("@descripcion", tablero.Descripcion));
                 command.Parameters.Add(new SQLiteParameter("@id", id));
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
             }
         }
         public List<Tablero> GetAll(){
-             var queryString = @"SELECT * FROM Tablero;";
-            List<Tablero> tableros = new List<Tablero>();
+            var queryString = @"SELECT * FROM Tablero;";
+            List<Tablero> tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 using(SQLiteDataReader reader = command.ExecuteReader())
                 {
+                    tableros = new List<Tablero>();
                     while (reader.Read())
                     {
                         var tablero = new Tablero();
@@ -58,12 +65,13 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
+            if(tableros == null) throw new Exception("Hubo un problema al buscar los tableros");
             return tableros;
         }
         public Tablero Get(int id){
             var queryString = "SELECT * FROM Tablero WHERE id = @idTablero";
 
-            var tablero = new Tablero();
+            Tablero tablero = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -73,6 +81,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 {
                     while (reader.Read())
                     {
+                        tablero = new Tablero();
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
                         tablero.Nombre = reader["nombre"].ToString();
@@ -81,13 +90,13 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-
+            if(tablero == null) throw new Exception("No se encontro ningun tablero");
             return (tablero);
         }
         public List<Tablero> GetByUser(int idUsuario){
             var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietario = @idUser";
 
-            var tableros = new List<Tablero>();
+            List<Tablero> tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -95,6 +104,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 command.Parameters.Add(new SQLiteParameter("@idUser", idUsuario));
                 using(SQLiteDataReader reader = command.ExecuteReader())
                 {
+                    tableros = new List<Tablero>();
                     while (reader.Read())
                     {
                         var tablero = new Tablero();
@@ -107,7 +117,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-
+            if(tableros.Count == 0) throw new Exception("No se encontro ningun tablero");
             return (tableros);
         }
         public void Remove(int id){
@@ -117,8 +127,10 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(queryString, connection);
                 command.Parameters.Add(new SQLiteParameter("@id", id));
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
                 connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al eliminar el tablero especificado");
             }
         }
     }
