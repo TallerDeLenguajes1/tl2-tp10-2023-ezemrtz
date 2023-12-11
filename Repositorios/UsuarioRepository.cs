@@ -60,6 +60,8 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
+            if(usuarios == null) throw new Exception("Usuario no encontrado");
+
             return usuarios;
         }
         public Usuario Get(int id){
@@ -83,6 +85,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
+            if(usuario == null) throw new Exception("Usuario no encontrado");
 
             return (usuario);
         }
