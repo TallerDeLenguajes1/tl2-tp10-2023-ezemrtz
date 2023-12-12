@@ -29,11 +29,7 @@ public class LoginController : Controller{
             try
             {
                 if(!ModelState.IsValid) return RedirectToAction("Index");
-                var user = _usuarioRepository.GetAll().FirstOrDefault(u => u.NombreDeUsuario == usuarioLogueado.Nombre && u.Contrasenia == usuarioLogueado.Contrasenia);
-                if(user == null){
-                    _logger.LogWarning("Intento de acceso invalido - Usuario: {0} Clave ingresada: {1}", usuarioLogueado.Nombre, usuarioLogueado.Contrasenia);
-                    return RedirectToAction("Index");
-                }
+                var user = _usuarioRepository.GetByNamePassword(usuarioLogueado.Nombre, usuarioLogueado.Contrasenia);
                 LoguearUsuario(user);
                 _logger.LogInformation("El usuario {0} ingreso correctamente", user.NombreDeUsuario);
                 return RedirectToRoute(new{controller = "Home", action = "Index"});
@@ -42,7 +38,8 @@ public class LoginController : Controller{
             catch (Exception ex)
             {
                 _logger.LogError(ex.ToString());
-                return RedirectToAction("Error");
+                _logger.LogWarning("Intento de acceso invalido - Usuario: {0} Clave ingresada: {1}", usuarioLogueado.Nombre, usuarioLogueado.Contrasenia);
+                return RedirectToAction("Index");
             }
         }
 
@@ -55,6 +52,6 @@ public class LoginController : Controller{
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View("Error!");
+            return View(new ErrorViewModel());
         }
 }

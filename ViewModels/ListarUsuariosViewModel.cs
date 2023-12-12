@@ -6,8 +6,10 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
 {
     public class ListarUsuariosViewModel
     {
+        public Usuario UsuarioLogueado {get; set;}
         public List<Usuario> Usuarios {get;set;}
-        public ListarUsuariosViewModel(List<Usuario> listaUsuarios){
+        public ListarUsuariosViewModel(Usuario logueado, List<Usuario> listaUsuarios){
+            UsuarioLogueado = logueado;
             Usuarios = listaUsuarios;
         }
     }

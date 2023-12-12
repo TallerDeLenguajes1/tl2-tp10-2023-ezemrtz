@@ -4,6 +4,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public void Update(int id, Usuario usuario);
         public List<Usuario> GetAll();
         public Usuario Get(int id);
+        public Usuario GetByNamePassword(string nombre, string contrasenia);
         public void Remove(int id);
     }
 }

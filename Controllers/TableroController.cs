@@ -121,6 +121,10 @@ public class TableroController : Controller
         }
     }
 
+    public IActionResult Error(){
+        return View(new ErrorViewModel());
+    }
+
      private bool logueado(){
         return HttpContext.Session.Keys.Any();
     }

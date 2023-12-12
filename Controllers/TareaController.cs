@@ -126,6 +126,10 @@ public class TareaController : Controller
         }
     }
 
+    public IActionResult Error(){
+        return View(new ErrorViewModel());
+    }
+
      private bool logueado(){
         return HttpContext.Session.Keys.Any();
     }

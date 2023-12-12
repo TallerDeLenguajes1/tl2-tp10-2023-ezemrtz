@@ -24,11 +24,11 @@ public class UsuarioController : Controller
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(esAdmin()){
                 var usuarios = _usuarioRepository.GetAll();
-                return View(new ListarUsuariosViewModel(usuarios));
+                return View(new ListarUsuariosViewModel(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")!),usuarios));
             }else{
                 var usuarios = new List<Usuario>();
                 usuarios.Add(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")));
-                return View(new ListarUsuariosViewModel(usuarios));
+                return View(new ListarUsuariosViewModel(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")!),usuarios));
             }
         }
         catch (Exception ex)
@@ -100,7 +100,7 @@ public class UsuarioController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            if(!ModelState.IsValid) return RedirectToAction("Index");
+            if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser) return RedirectToAction("Index");
             _usuarioRepository.Remove(idUser);
             return RedirectToAction("Index");
         }
@@ -109,6 +109,10 @@ public class UsuarioController : Controller
             _logger.LogError(ex.ToString()); 
             return RedirectToAction("Error");  
         }
+    }
+
+    public IActionResult Error(){
+        return View(new ErrorViewModel());
     }
 
     private bool logueado(){
