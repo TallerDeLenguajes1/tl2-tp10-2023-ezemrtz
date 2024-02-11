@@ -11,7 +11,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         public int Id { get ; set; }
 
         [Required(ErrorMessage = "Este campo es requerido.")]
-        [Display(Name = "ID Usuario Propietario")]
+        [Display(Name = "Usuario Propietario")]
         public int IdUsuarioPropietario { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido.")]

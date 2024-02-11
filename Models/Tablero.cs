@@ -26,6 +26,5 @@ public class Tablero{
         this.IdUsuarioPropietario = tablero.IdUsuarioPropietario;
         this.Nombre = tablero.Nombre;
         this.Descripcion = tablero.Descripcion;
-    }
-        
+    }   
 }

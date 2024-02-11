@@ -6,9 +6,16 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
 {
     public class ListarTareasViewModel
     {
-        public List<Tarea> Tareas {get;set;}
-        public ListarTareasViewModel(List<Tarea> listaTareas){
-            Tareas = listaTareas;
+        public List<TareaTableroUsuarioViewModel> Tareas {get;set;}
+        public ListarTareasViewModel(List<Tarea> listaTareas, List<Tablero> listaTableros, List<Usuario> listaUsuarios){
+            Tareas = new List<TareaTableroUsuarioViewModel>();
+            foreach (var tarea in listaTareas)
+            {
+                var tablero = listaTableros.FirstOrDefault(t => t.Id == tarea.IdTablero);
+                var usuario = listaUsuarios.FirstOrDefault(u => u.Id == tarea.IdUsuarioAsignado);
+                var TTUViewModel = new TareaTableroUsuarioViewModel(tarea, tablero, usuario);
+                Tareas.Add(TTUViewModel);
+            }
         }
     }
 }

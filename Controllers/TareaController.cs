@@ -31,11 +31,13 @@ public class TareaController : Controller
             if(!esAdmin()){
                 var idUser = (int)HttpContext.Session.GetInt32("id");
                 var tableros = _tableroRepository.GetByUser(idUser);
-                if(tableros.Any(t => t.Id == id)){
-                    return View(new ListarTareasViewModel(_tareaRepository.GetByTablero(id)));
+                var tareas = _tareaRepository.GetByTablero(id);
+                if(tableros.Any(t => t.Id == id) || tareas.Any(t => t.IdUsuarioAsignado == idUser)){
+                    return View(new ListarTareasViewModel(tareas, _tableroRepository.GetAll(), _usuarioRepository.GetAll()));
                 }
             }else{
-                return View(new ListarTareasViewModel(_tareaRepository.GetByTablero(id)));
+
+                return View(new ListarTareasViewModel(_tareaRepository.GetByTablero(id), _tableroRepository.GetAll(), _usuarioRepository.GetAll()));
             }
             return RedirectToRoute(new {controller = "Tablero", action = "Index"});
         }

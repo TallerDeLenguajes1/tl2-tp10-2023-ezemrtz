@@ -25,7 +25,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Display(Name = "Estado")]
         public EstadoTarea Estado { get; set; }
 
-        [Display(Name = "ID Usuario asignado")]
+        [Display(Name = "Usuario asignado")]
         public int? IdUsuarioAsignado { get; set; }
 
         public List<Usuario> Usuarios { get; set; }

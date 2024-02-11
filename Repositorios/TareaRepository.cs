@@ -107,7 +107,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 connection.Close();
             }
             if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas asociadas a un tablero");
-            return (tareas);
+            return tareas;
         }
         public List<Tarea> GetByEstado(int estado){
             var queryString = "SELECT * FROM Tarea WHERE estado = @estado";

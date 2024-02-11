@@ -9,7 +9,7 @@
             <select asp-for="@Model.IdUsuarioAsignado" class="form-select">
                 <option value="" selected> - - - </option>
                 @foreach(var u in @Model.Usuarios){
-                    <option value="@u.Id">@u.Id</option>
+                    <option value="@u.Id">@u.NombreDeUsuario</option>
                 }
             </select>
         </div>

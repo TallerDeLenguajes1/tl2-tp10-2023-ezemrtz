@@ -7,7 +7,6 @@
 <h2> Lista de Usuarios </h2>
 <table class="table table-striped">
     <thead>
-        <th>Id</th>
         <th>Nombre</th>
         <th>Rol</th>
         <th>Modificar</th>
@@ -16,7 +15,6 @@
     <tbody>
         @foreach(var usuario in Model.Usuarios){
             <tr>
-                <td>@usuario.Id</td>
                 <td>@usuario.NombreDeUsuario</td>
                 <td>@usuario.Rol</td>
                 <td><a asp-controller="Usuario" asp-action="UpdateUser" asp-route-idUser="@usuario.Id" class="btn btn-outline-primary">Modificar</a></td>

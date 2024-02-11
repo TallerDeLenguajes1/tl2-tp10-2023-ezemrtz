@@ -11,13 +11,15 @@ public class TableroController : Controller
 {
     private readonly ITableroRepository _tableroRepository;
     private readonly ITareaRepository _tareaRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
     private readonly ILogger<TableroController> _logger;
 
-    public TableroController(ILogger<TableroController> logger, ITableroRepository tableroRepository, ITareaRepository tareaRepository)
+    public TableroController(ILogger<TableroController> logger, ITableroRepository tableroRepository, ITareaRepository tareaRepository, IUsuarioRepository usuarioRepository)
     {
         _logger = logger;
         _tableroRepository = tableroRepository;
         _tareaRepository = tareaRepository;
+        _usuarioRepository = usuarioRepository;
     }
 
     public IActionResult Index(){
@@ -26,9 +28,10 @@ public class TableroController : Controller
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(esAdmin()){
                 var tableros = _tableroRepository.GetAll();
-                return View(new ListarTablerosViewModel(tableros));
+                var usuarios = _usuarioRepository.GetAll();
+                return View(new ListarTablerosViewModel(tableros, usuarios));
             }else{
-                return View(new ListarTablerosViewModel(_tableroRepository.GetByUser((int)HttpContext.Session.GetInt32("id"))));
+                return View(new ListarTablerosViewModel(_tableroRepository.GetByUser((int)HttpContext.Session.GetInt32("id")), _tableroRepository.GetByAssignedTask((int)HttpContext.Session.GetInt32("id")), _usuarioRepository.GetAll(), (int)HttpContext.Session.GetInt32("id")));
             }
         }
         catch (Exception ex)
@@ -125,12 +128,11 @@ public class TableroController : Controller
         return View(new ErrorViewModel());
     }
 
-     private bool logueado(){
+    private bool logueado(){
         return HttpContext.Session.Keys.Any();
     }
 
     private bool esAdmin(){
         return HttpContext.Session.Keys.Any() && HttpContext.Session.GetString("rol") == NivelAcceso.administrador.ToString();
     }
-
 }
