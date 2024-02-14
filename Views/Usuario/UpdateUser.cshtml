@@ -13,11 +13,13 @@
             <input asp-for="@Model.Contrasenia" class="form-control" type="password"/>
             <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>    
         </div>
-        <div class="form-group mb-3">
-            <label asp-for="@Model.Rol"></label>
-            <select asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
-            <span asp-validation-for="@Model.Rol" class="text-danger"></span>    
-        </div>
+        @if(Model.Id != Context.Session.GetInt32("id")){
+            <div class="form-group mb-3">
+                <label asp-for="@Model.Rol"></label>
+                <select asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
+                <span asp-validation-for="@Model.Rol" class="text-danger"></span>    
+            </div>
+        }
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>

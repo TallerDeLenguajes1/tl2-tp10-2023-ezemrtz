@@ -87,7 +87,9 @@ public class TareaController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            return View(new ModificarTareaViewModel(_tareaRepository.Get(id), _usuarioRepository.GetAll()));
+            var tarea = _tareaRepository.Get(id);
+            var tablero = _tableroRepository.Get(tarea.IdTablero);
+            return View(new ModificarTareaViewModel(tarea, _usuarioRepository.GetAll(), tablero.IdUsuarioPropietario));
         }
         catch (Exception ex)
         {

@@ -25,8 +25,12 @@
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
                 <td>@tarea.NombreUsuarioAsignado</td>
-                <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
-                <td><a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar la tarea?')">Eliminar</a></td>
+                @if(@tarea.IdUsuarioAsignado == Context.Session.GetInt32("id")){
+                    <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
+                }
+                @if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id")){
+                    <td><a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar la tarea?')">Eliminar</a></td>
+                }
             </tr>
         }
     </tbody>

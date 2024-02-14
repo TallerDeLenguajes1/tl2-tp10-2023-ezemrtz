@@ -6,13 +6,15 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
 {
     public class TableroUsuarioViewModel
     {
-        public int Id { get; set; }
+        public int IdTablero { get; set; }
+        public int IdUsuarioPropietario { get; set; }
         public string NombreUsuarioPropietario { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
         public TableroUsuarioViewModel(Tablero tablero, Usuario usuario){
-           Id = tablero.Id;
+           IdTablero = tablero.Id;
+           IdUsuarioPropietario = usuario.Id;
            NombreUsuarioPropietario = usuario.NombreDeUsuario;
            Nombre = tablero.Nombre;
            Descripcion = tablero.Descripcion;

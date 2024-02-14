@@ -27,7 +27,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Required(ErrorMessage = "Este campo es requerido.")]
         [Display(Name = "Estado")]
         public EstadoTarea Estado { get; set; }
-        
+        public int IdUsuarioPropietario { get; set; }
+        public int? IdUsuarioAsignado { get; set; }
         [Display(Name = "Usuario asignado")]
         public string? NombreUsuarioAsignado { get; set; }
 
@@ -38,6 +39,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             Descripcion = tarea.Descripcion;
             Color = tarea.Color;
             Estado = tarea.Estado;
+            IdUsuarioPropietario = tablero.IdUsuarioPropietario;
+            IdUsuarioAsignado = tarea.IdUsuarioAsignado;
             NombreUsuarioAsignado = usuario.NombreDeUsuario;
         }
     }
