@@ -113,6 +113,38 @@ public class TareaController : Controller
         }
     }
 
+    [HttpGet]
+    public IActionResult UpdateEstado(int id){
+        try
+        {
+            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            var tarea = _tareaRepository.Get(id);
+            return View(new ModificarEstadoTareaViewModel(tarea));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+    [HttpPost]
+    public IActionResult UpdateEstado(ModificarEstadoTareaViewModel tarea){
+        try
+        {
+            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if(!ModelState.IsValid) return RedirectToAction("Index", new {id = tarea.IdTablero});
+            var tareaNueva = _tareaRepository.Get(tarea.Id);
+            tareaNueva.Estado = tarea.Estado;
+            _tareaRepository.Update(tarea.Id, tareaNueva);
+            return RedirectToAction("Index", new{id = tarea.IdTablero});
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
+
     public IActionResult DeleteTarea(int id){
         try
         {

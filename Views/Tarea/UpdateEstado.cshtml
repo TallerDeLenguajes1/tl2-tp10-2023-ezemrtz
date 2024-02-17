@@ -1,0 +1,21 @@
+@model tl2_tp10_2023_ezemrtz.ViewModels.ModificarEstadoTareaViewModel
+
+<section class="section_forms">
+    <form asp-controller="Tarea" asp-action="UpdateEstado" class="formsMVC">
+
+        <div class="form-group mb-3">
+            <input asp-for="@Model.Id" hidden/>
+            <input asp-for="@Model.IdTablero" hidden/>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Estado"></label>
+            <select asp-for="@Model.Estado" asp-items="@Html.GetEnumSelectList<EstadoTarea>()" class="form-select"></select>
+            <span asp-validation-for="@Model.Estado" class="text-danger"></span>    
+        </div>
+        <div class="form-group mb-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+</section>
+
+@section Scripts{<partial name="_ValidationScriptsPartial"/>}

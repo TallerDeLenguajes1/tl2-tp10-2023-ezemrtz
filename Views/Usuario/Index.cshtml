@@ -9,8 +9,7 @@
     <thead>
         <th>Nombre</th>
         <th>Rol</th>
-        <th>Modificar</th>
-        <th>Eliminar</th>
+        <th colspan="2">Acciones</th>
     </thead>
     <tbody>
         @foreach(var usuario in Model.Usuarios){
@@ -20,6 +19,8 @@
                 <td><a asp-controller="Usuario" asp-action="UpdateUser" asp-route-idUser="@usuario.Id" class="btn btn-outline-primary">Modificar</a></td>
                 @if(!(@Model.UsuarioLogueado.Id == usuario.Id)){
                     <td><a asp-controller="Usuario" asp-action="DeleteUser" asp-route-idUser="@usuario.Id" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar el usuario?')">Eliminar</a></td>
+                }else{
+                    <td></td>
                 }
             </tr>
         }

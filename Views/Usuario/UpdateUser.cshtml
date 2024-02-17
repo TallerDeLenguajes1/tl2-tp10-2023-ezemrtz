@@ -19,6 +19,8 @@
                 <select asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
                 <span asp-validation-for="@Model.Rol" class="text-danger"></span>    
             </div>
+        }else{
+            <select hidden asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
         }
         <div class="form-group mb-3">
             <button type="submit" class="btn btn-primary">Enviar</button>

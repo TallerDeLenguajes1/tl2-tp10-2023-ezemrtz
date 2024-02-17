@@ -13,10 +13,7 @@
         <th>Usuario Propietario</th>
         <th>Nombre</th>
         <th>Descripcion</th>
-        <th>Modificar</th>
-        <th>Eliminar</th>
-        <th></th>
-        <th></th>
+        <th colspan="4">Acciones</th>
     </thead>
     <tbody>
         @foreach(var tablero in Model.Tableros){
@@ -25,10 +22,14 @@
                 <td>@tablero.Nombre</td>
                 <td>@tablero.Descripcion</td>
                 <td><a asp-controller="Tarea" asp-action="Index" asp-route-id="@tablero.IdTablero" class="btn btn-outline-info">Ver</a></td>
-                @if(@tablero.IdUsuarioPropietario == Context.Session.GetInt32("id")){
+                @if(@tablero.IdUsuarioPropietario == Context.Session.GetInt32("id") || Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){
                     <td><a asp-controller="Tablero" asp-action="UpdateTablero" asp-route-id="@tablero.IdTablero" class="btn btn-outline-primary">Modificar</a></td>
                     <td><a asp-controller="Tablero" asp-action="DeleteTablero" asp-route-id="@tablero.IdTablero" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar el tablero?')">Eliminar</a></td>
                     <td><a asp-controller="Tarea" asp-action="CreateTarea" asp-route-id="@tablero.IdTablero" class="btn btn-outline-success">Agregar Tarea</a></td>
+                }else{
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 }
             </tr>
         }

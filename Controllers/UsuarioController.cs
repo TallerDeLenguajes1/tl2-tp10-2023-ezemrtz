@@ -100,7 +100,7 @@ public class UsuarioController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser) return RedirectToAction("Index");
+            if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser || !esAdmin()) return RedirectToAction("Index");
             _usuarioRepository.Remove(idUser);
             return RedirectToAction("Index");
         }

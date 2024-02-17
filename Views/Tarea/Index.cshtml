@@ -13,8 +13,8 @@
         <th>Color</th>
         <th>Estado</th>
         <th>Usuario Asignado</th>
-        <th>Modificar</th>
-        <th>Eliminar</th>
+        <th colspan="2">Acciones</th>
+        <th></th>
     </thead>
     <tbody>
         @foreach(var tarea in Model.Tareas){
@@ -25,11 +25,14 @@
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
                 <td>@tarea.NombreUsuarioAsignado</td>
-                @if(@tarea.IdUsuarioAsignado == Context.Session.GetInt32("id")){
+                @if(@tarea.IdUsuarioAsignado == Context.Session.GetInt32("id") && @tarea.IdUsuarioPropietario != @tarea.IdUsuarioAsignado){
+                    <td><a asp-controller="Tarea" asp-action="UpdateEstado" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
+                }else if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id") || Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){
                     <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
-                }
-                @if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id")){
                     <td><a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar la tarea?')">Eliminar</a></td>
+                }else{
+                    <td></td>
+                    <td></td>
                 }
             </tr>
         }

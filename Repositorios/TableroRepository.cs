@@ -117,7 +117,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-            if(tableros.Count == 0) throw new Exception("No se encontro ningun tablero");
+            if(tableros.Count == null) throw new Exception("No se encontro ningun tablero");
             return (tableros);
         }
 

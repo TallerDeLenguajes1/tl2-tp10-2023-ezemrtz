@@ -32,7 +32,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Display(Name = "Usuario asignado")]
         public string? NombreUsuarioAsignado { get; set; }
 
-        public TareaTableroUsuarioViewModel(Tarea tarea, Tablero tablero, Usuario usuario){
+        public TareaTableroUsuarioViewModel(Tarea tarea, Tablero tablero, Usuario? usuario){
             IdTarea = tarea.Id;
             NombreTablero = tablero.Nombre;
             NombreTarea = tarea.Nombre;
@@ -41,7 +41,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             Estado = tarea.Estado;
             IdUsuarioPropietario = tablero.IdUsuarioPropietario;
             IdUsuarioAsignado = tarea.IdUsuarioAsignado;
-            NombreUsuarioAsignado = usuario.NombreDeUsuario;
+            if (usuario != null)  NombreUsuarioAsignado = usuario.NombreDeUsuario;
         }
     }
 }
