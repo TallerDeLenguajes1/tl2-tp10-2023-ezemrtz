@@ -15,11 +15,11 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         
         [StringLength(50)]
         [Display(Name = "Descripción")]
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Color")]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         [Required(ErrorMessage = "Este campo es requerido.")]
         [Display(Name = "Estado")]

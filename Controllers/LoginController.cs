@@ -49,6 +49,11 @@ public class LoginController : Controller{
             HttpContext.Session.SetString("rol", usuario.Rol.ToString());
         }
 
+        public IActionResult DesloguearUsuario(){
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

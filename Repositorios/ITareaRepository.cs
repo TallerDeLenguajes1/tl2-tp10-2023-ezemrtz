@@ -5,6 +5,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Tarea Get(int id);
         public List<Tarea> GetByTablero(int idTablero);
         public List<Tarea> GetByUser(int idUsuario);
+        public void DesasignarByUser(int idUsuario);
         public void Remove(int id);
         public void AsignarAUsuario(int idUsuario, int idTarea);
     }

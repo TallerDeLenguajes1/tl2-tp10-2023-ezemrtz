@@ -166,7 +166,7 @@ public class TareaController : Controller
         return View(new ErrorViewModel());
     }
 
-     private bool logueado(){
+    private bool logueado(){
         return HttpContext.Session.Keys.Any();
     }
 

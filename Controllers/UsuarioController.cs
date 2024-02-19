@@ -10,12 +10,16 @@ namespace tl2_tp10_2023_ezemrtz.Controllers;
 public class UsuarioController : Controller
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly ITableroRepository _tableroRepository;
+    private readonly ITareaRepository _tareaRepository;
     private readonly ILogger<UsuarioController> _logger;
 
-    public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepository usuarioRepository)
+    public UsuarioController(ILogger<UsuarioController> logger, IUsuarioRepository usuarioRepository, ITableroRepository tableroRepository, ITareaRepository tareaRepository)
     {
         _logger = logger;
         _usuarioRepository = usuarioRepository;
+        _tableroRepository = tableroRepository;
+        _tareaRepository = tareaRepository;
     }
 
     public IActionResult Index(){
@@ -57,7 +61,7 @@ public class UsuarioController : Controller
         {
             if(!ModelState.IsValid) return RedirectToAction("CreateUser");
             _usuarioRepository.Create(new Usuario(usuario));
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", usuario);
         }
         catch (Exception ex)
         {
@@ -101,6 +105,17 @@ public class UsuarioController : Controller
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser || !esAdmin()) return RedirectToAction("Index");
+            var tableros = _tableroRepository.GetByUser(idUser);
+            foreach (var tab in tableros)
+            {
+                var tareas = _tareaRepository.GetByTablero(tab.Id);
+                foreach (var tar  in tareas)
+                {
+                    _tareaRepository.Remove(tar.Id);
+                }
+                _tableroRepository.Remove(tab.Id);
+            }
+            _tareaRepository.DesasignarByUser(idUser);
             _usuarioRepository.Remove(idUser);
             return RedirectToAction("Index");
         }

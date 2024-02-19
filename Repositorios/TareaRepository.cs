@@ -169,6 +169,20 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
             if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas");
             return (tareas);
         }
+
+        public void DesasignarByUser(int idUsuario){
+             var query = $"UPDATE Tarea SET id_usuario_asignado = NULL WHERE id_usuario_asignado = @id";
+
+            using(SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
+                connection.Open();
+                var command = new SQLiteCommand(query, connection);
+                command.Parameters.Add(new SQLiteParameter("@id", idUsuario));
+                var filas = command.ExecuteNonQuery();
+                connection.Close();
+
+                if(filas == 0) throw new Exception("Hubo un problema al modificar la tarea");
+            }
+        }
         public void Remove(int id){
             var queryString = "DELETE FROM Tarea WHERE id = @id";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))

@@ -12,8 +12,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Display(Name = "Nombre del tablero")]
         public string Nombre { get; set; }
 
-        [Display(Name = "Descripcion")]
-        public string Descripcion { get; set; }
+        [Display(Name = "Descripción")]
+        public string? Descripcion { get; set; }
 
         public CrearTableroViewModel(Tablero tablero){
             this.IdUsuarioPropietario = tablero.IdUsuarioPropietario;

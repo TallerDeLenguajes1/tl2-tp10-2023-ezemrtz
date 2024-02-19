@@ -14,5 +14,6 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [PasswordPropertyText]
         [Display(Name = "Contraseña")]
         public string Contrasenia {get;set;}
+
     }
 }
