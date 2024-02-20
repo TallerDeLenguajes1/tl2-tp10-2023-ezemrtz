@@ -18,8 +18,15 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Required(ErrorMessage = "Este campo es requerido.")]
         [PasswordPropertyText]
         [StringLength(30)]
-        [Display(Name = "Contraseña")]       
-        public string Contrasenia {get;set;}       
+        [Display(Name = "Contraseña nueva")]       
+        public string Contrasenia {get;set;}   
+        
+        [Required(ErrorMessage = "Este campo es requerido.")]
+        [PasswordPropertyText]
+        [StringLength(30)]
+        [Compare("Contrasenia", ErrorMessage = "No coincide con la contraseña")]
+        [Display(Name = "Confirmar contraseña")]  
+        public string Confirmacion {get;set;}     
 
         [Required(ErrorMessage = "Este campo es requerido.")]
         [Display(Name = "Rol")]   

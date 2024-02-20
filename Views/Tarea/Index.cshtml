@@ -4,7 +4,7 @@
 
 @model tl2_tp10_2023_ezemrtz.ViewModels.ListarTareasViewModel
 
-<h2> Lista de Tareas </h2>
+<h2> Lista de Tareas</h2>
 <table class="table table-striped">
     <thead>
         <th>Tablero</th>
@@ -25,12 +25,12 @@
                 <td>@tarea.Color</td>
                 <td>@tarea.Estado</td>
                 <td>@tarea.NombreUsuarioAsignado</td>
-                @if(@tarea.IdUsuarioAsignado == Context.Session.GetInt32("id") && @tarea.IdUsuarioPropietario != @tarea.IdUsuarioAsignado){
-                    <td><a asp-controller="Tarea" asp-action="UpdateEstado" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
-                    <td></td>
-                }else if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id") || Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){
+                @if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id") || Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){
                     <td><a asp-controller="Tarea" asp-action="UpdateTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
                     <td><a asp-controller="Tarea" asp-action="DeleteTarea" asp-route-id="@tarea.IdTarea" class="btn btn-outline-danger" onclick="return confirm('¿Estas seguro que quieres eliminar la tarea?')">Eliminar</a></td>
+                }else if(@tarea.IdUsuarioAsignado == Context.Session.GetInt32("id") && @tarea.IdUsuarioPropietario != @tarea.IdUsuarioAsignado){
+                    <td><a asp-controller="Tarea" asp-action="UpdateEstado" asp-route-id="@tarea.IdTarea" class="btn btn-outline-primary">Modificar</a></td>
+                    <td></td>
                 }else{
                     <td></td>
                     <td></td>

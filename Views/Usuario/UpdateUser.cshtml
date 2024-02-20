@@ -4,8 +4,9 @@
 @model tl2_tp10_2023_ezemrtz.ViewModels.ModificarUsuarioViewModel
 
 <section class="section_forms">
-    <form asp-controller="Usuario" asp-action="UpdateUser" class="formsMVC">
+    <form asp-controller="Usuario" asp-action="UpdateUser" class="formsMVC form-v1">
         <input asp-for="@Model.Id" hidden>
+        <legend>ACTUALIZAR USUARIO</legend>
         <div class="form-group mb-3">
             <label asp-for="@Model.Nombre"></label>
             <input asp-for="@Model.Nombre" class="form-control" />
@@ -16,6 +17,11 @@
             <input asp-for="@Model.Contrasenia" class="form-control" type="password"/>
             <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>    
         </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Confirmacion"></label>
+            <input asp-for="@Model.Confirmacion" class="form-control" type="password"/>
+            <span asp-validation-for="@Model.Confirmacion" class="text-danger"></span>    
+        </div>
         @if(Model.Id != Context.Session.GetInt32("id")){
             <div class="form-group mb-3">
                 <label asp-for="@Model.Rol"></label>
@@ -25,7 +31,7 @@
         }else{
             <select hidden asp-for="@Model.Rol" asp-items="@Html.GetEnumSelectList<NivelAcceso>()" class="form-select" aria-label="Default select example"></select>
         }
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 btn-box">
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </form>

@@ -43,7 +43,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 if(filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
             }
         }
-        public List<Tablero> GetAll(){
+        public List<Tablero>? GetAll(){
             var queryString = @"SELECT * FROM Tablero;";
             List<Tablero> tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -71,7 +71,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Tablero Get(int id){
             var queryString = "SELECT * FROM Tablero WHERE id = @idTablero";
 
-            Tablero tablero = null;
+            Tablero? tablero = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -96,7 +96,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public List<Tablero> GetByUser(int idUsuario){
             var queryString = "SELECT * FROM Tablero WHERE id_usuario_propietario = @idUser";
 
-            List<Tablero> tableros = null;
+            List<Tablero>? tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -117,14 +117,14 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-            if(tableros.Count == null) throw new Exception("No se encontro ningun tablero");
+            if(tableros == null) throw new Exception("Hubo un problema con la consulta para obtener los tableros a partir del usuario");
             return (tableros);
         }
 
         public List<Tablero> GetByAssignedTask(int idUsuario){
-             var queryString = "SELECT * FROM Tablero INNER JOIN Tarea ON(Tablero.id = id_tablero) WHERE id_usuario_asignado = @idUser AND id_usuario_propietario <> @idUser";
+            var queryString = "SELECT * FROM Tablero INNER JOIN Tarea ON(Tablero.id = id_tablero) WHERE id_usuario_asignado = @idUser AND id_usuario_propietario <> @idUser";
 
-            List<Tablero> tableros = null;
+            List<Tablero>? tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();

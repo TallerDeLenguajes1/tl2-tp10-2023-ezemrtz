@@ -4,8 +4,8 @@
 @model tl2_tp10_2023_ezemrtz.ViewModels.ModificarTareaViewModel
 
 <section class="section_forms">
-    <form asp-controller="Tarea" asp-action="UpdateTarea" class="formsMVC">
-
+    <form asp-controller="Tarea" asp-action="UpdateTarea" class="formsMVC form-v1">
+        <legend>MODIFICAR TAREA</legend>
         <div class="form-group mb-3">
             <input asp-for="@Model.Id" hidden/>
             <input asp-for="@Model.IdTablero" class="form-control" hidden/>

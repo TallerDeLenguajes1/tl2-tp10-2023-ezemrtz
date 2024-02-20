@@ -31,7 +31,7 @@ public class UsuarioController : Controller
                 return View(new ListarUsuariosViewModel(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")!),usuarios));
             }else{
                 var usuarios = new List<Usuario>();
-                usuarios.Add(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")));
+                usuarios.Add(_usuarioRepository.Get(Convert.ToInt32(HttpContext.Session.GetInt32("id"))));
                 return View(new ListarUsuariosViewModel(_usuarioRepository.Get((int)HttpContext.Session.GetInt32("id")!),usuarios));
             }
         }
@@ -75,6 +75,7 @@ public class UsuarioController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if(!esAdmin() && idUser != Convert.ToInt32(HttpContext.Session.GetInt32("id"))) return RedirectToAction("Error");
             var user = _usuarioRepository.Get(idUser);
             return View(new ModificarUsuarioViewModel(user));
         }
@@ -104,7 +105,7 @@ public class UsuarioController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser || !esAdmin()) return RedirectToAction("Index");
+            if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser || !esAdmin()) return RedirectToAction("Error");
             var tableros = _tableroRepository.GetByUser(idUser);
             foreach (var tab in tableros)
             {

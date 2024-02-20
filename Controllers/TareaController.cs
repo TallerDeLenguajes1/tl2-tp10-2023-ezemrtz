@@ -29,7 +29,7 @@ public class TareaController : Controller
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(!esAdmin()){
-                var idUser = (int)HttpContext.Session.GetInt32("id");
+                var idUser = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
                 var tableros = _tableroRepository.GetByUser(idUser);
                 var tareas = _tareaRepository.GetByTablero(id);
                 if(tableros.Any(t => t.Id == id) || tareas.Any(t => t.IdUsuarioAsignado == idUser)){
@@ -53,6 +53,8 @@ public class TareaController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            var tablero = _tableroRepository.Get(id);
+            if(tablero == null || (!esAdmin() && tablero.IdUsuarioPropietario != Convert.ToInt32(HttpContext.Session.GetInt32("id")))) return RedirectToAction("Error");
             var tarea = new CrearTareaViewModel{
                 IdTablero = id,
                 Usuarios = _usuarioRepository.GetAll()
@@ -88,8 +90,13 @@ public class TareaController : Controller
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             var tarea = _tareaRepository.Get(id);
-            var tablero = _tableroRepository.Get(tarea.IdTablero);
-            return View(new ModificarTareaViewModel(tarea, _usuarioRepository.GetAll(), tablero.IdUsuarioPropietario));
+            if(tarea != null){
+                var tablero = _tableroRepository.Get(tarea.IdTablero);
+                if(tablero != null && (esAdmin() || tablero.IdUsuarioPropietario == Convert.ToInt32(HttpContext.Session.GetInt32("id")))){
+                    return View(new ModificarTareaViewModel(tarea, _usuarioRepository.GetAll(), tablero.IdUsuarioPropietario));
+                }
+            }
+            return RedirectToAction("Error");
         }
         catch (Exception ex)
         {
@@ -119,7 +126,11 @@ public class TareaController : Controller
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             var tarea = _tareaRepository.Get(id);
-            return View(new ModificarEstadoTareaViewModel(tarea));
+            if(tarea != null && (esAdmin() || tarea.IdUsuarioAsignado == Convert.ToInt32(HttpContext.Session.GetInt32("id")) || _tareaRepository.GetIdOwner(id) == Convert.ToInt32(HttpContext.Session.GetInt32("id")))){
+                return View(new ModificarEstadoTareaViewModel(tarea));
+            }else{
+                return RedirectToAction("Error");
+            }
         }
         catch (Exception ex)
         {
@@ -149,8 +160,8 @@ public class TareaController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if(!esAdmin() && _tareaRepository.GetIdOwner(id) != Convert.ToInt32(HttpContext.Session.GetInt32("id"))) return RedirectToAction("Error");
             if(!ModelState.IsValid) return RedirectToAction("Index", id);
-
             var idTablero = _tareaRepository.Get(id).IdTablero;
             _tareaRepository.Remove(id);
             return RedirectToAction("Index", new {id = idTablero});

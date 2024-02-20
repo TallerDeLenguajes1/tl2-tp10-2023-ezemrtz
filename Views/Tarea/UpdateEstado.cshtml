@@ -4,8 +4,8 @@
 @model tl2_tp10_2023_ezemrtz.ViewModels.ModificarEstadoTareaViewModel
 
 <section class="section_forms">
-    <form asp-controller="Tarea" asp-action="UpdateEstado" class="formsMVC">
-
+    <form asp-controller="Tarea" asp-action="UpdateEstado" class="formsMVC form-v1">
+        <legend>CAMBIAR ESTADO DE TAREA</legend>
         <div class="form-group mb-3">
             <input asp-for="@Model.Id" hidden/>
             <input asp-for="@Model.IdTablero" hidden/>
@@ -15,7 +15,7 @@
             <select asp-for="@Model.Estado" asp-items="@Html.GetEnumSelectList<EstadoTarea>()" class="form-select"></select>
             <span asp-validation-for="@Model.Estado" class="text-danger"></span>    
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-3 btn-box">
             <button type="submit" class="btn btn-primary">Enviar</button>
         </div>
     </form>

@@ -79,6 +79,28 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
             if(tarea == null) throw new Exception("Tarea no encontrada");
             return (tarea);
         }
+
+        public int GetIdOwner(int id){
+            var queryString = "SELECT * FROM Tarea INNER JOIN Tablero ON(Tablero.id = id_tablero) WHERE Tarea.id = @id";
+
+            int? idPropietario = null;
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@id", id));
+                using(SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        idPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    }
+                }
+                connection.Close();
+            }
+            if(idPropietario == null) throw new Exception("Hubo un problema al buscar la tarea");
+            return Convert.ToInt32(idPropietario);
+        }
         public List<Tarea> GetByTablero(int idTablero){
             var queryString = "SELECT * FROM Tarea WHERE id_tablero = @idTablero";
 

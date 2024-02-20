@@ -20,8 +20,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         public string Nombre { get; set; }
 
         [StringLength(50)]
-        [Display(Name = "Descripcion")]
-        public string Descripcion { get; set; }
+        [Display(Name = "Descripción")]
+        public string? Descripcion { get; set; }
 
         public ModificarTableroViewModel(Tablero tablero){
             this.Id = tablero.Id;

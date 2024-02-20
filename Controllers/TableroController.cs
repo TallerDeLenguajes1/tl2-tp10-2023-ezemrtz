@@ -29,9 +29,12 @@ public class TableroController : Controller
             if(esAdmin()){
                 var tableros = _tableroRepository.GetAll();
                 var usuarios = _usuarioRepository.GetAll();
-                return View(new ListarTablerosViewModel(tableros, usuarios));
+                var idUserLogueado = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+
+                return View(new ListarTablerosViewModel(_tableroRepository.GetAll(),_tableroRepository.GetByUser(idUserLogueado), _tableroRepository.GetByAssignedTask(idUserLogueado), _usuarioRepository.GetAll(), idUserLogueado));
             }else{
-                return View(new ListarTablerosViewModel(_tableroRepository.GetByUser((int)HttpContext.Session.GetInt32("id")), _tableroRepository.GetByAssignedTask((int)HttpContext.Session.GetInt32("id")), _usuarioRepository.GetAll(), (int)HttpContext.Session.GetInt32("id")));
+                var idUserLogueado = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+                return View(new ListarTablerosViewModel(_tableroRepository.GetByUser(idUserLogueado), _tableroRepository.GetByAssignedTask(idUserLogueado), _usuarioRepository.GetAll(), idUserLogueado));
             }
         }
         catch (Exception ex)
@@ -46,7 +49,7 @@ public class TableroController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
-            return View(new CrearTableroViewModel{IdUsuarioPropietario = (int)HttpContext.Session.GetInt32("id")});
+            return View(new CrearTableroViewModel{IdUsuarioPropietario = Convert.ToInt32(HttpContext.Session.GetInt32("id"))});
         }
         catch (Exception ex)
         {
@@ -77,6 +80,8 @@ public class TableroController : Controller
         try
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            var tablero = _tableroRepository.Get(id);
+            if(tablero == null || (!esAdmin() && tablero.IdUsuarioPropietario != Convert.ToInt32(HttpContext.Session.GetInt32("id")))) return RedirectToAction("Error");
             return View(new ModificarTableroViewModel(_tableroRepository.Get(id)));
         }
         catch (Exception ex)
@@ -107,7 +112,7 @@ public class TableroController : Controller
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(!esAdmin()){
                 var tablero = _tableroRepository.Get(id);
-                if((int)HttpContext.Session.GetInt32("id") != tablero.IdUsuarioPropietario) return RedirectToAction("Index");
+                if(Convert.ToInt32(HttpContext.Session.GetInt32("id")) != tablero.IdUsuarioPropietario) return RedirectToAction("Error");
             }
             var tareas = _tareaRepository.GetByTablero(id);
             foreach (var tarea in tareas)

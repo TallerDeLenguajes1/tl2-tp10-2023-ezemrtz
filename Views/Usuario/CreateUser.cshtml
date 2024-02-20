@@ -4,7 +4,8 @@
 @model tl2_tp10_2023_ezemrtz.ViewModels.CrearUsuarioViewModel
 
 <section class="section_forms">
-    <form asp-controller="Usuario" asp-action="CreateUser" class="formsMVC">
+    <form asp-controller="Usuario" asp-action="CreateUser" class="formsMVC form-login-register">
+        <legend>Registrarse</legend>
         <div class="form-group mb-3">
             <label asp-for="@Model.Nombre"></label>
             <input asp-for="@Model.Nombre" class="form-control" />
@@ -14,6 +15,11 @@
             <label asp-for="@Model.Contrasenia"></label>
             <input asp-for="@Model.Contrasenia" class="form-control" type="password"/>
             <span asp-validation-for="@Model.Contrasenia" class="text-danger"></span>    
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="@Model.Confirmacion"></label>
+            <input asp-for="@Model.Confirmacion" class="form-control" type="password"/>
+            <span asp-validation-for="@Model.Confirmacion" class="text-danger"></span>    
         </div>
         <div class="form-group mb-3" hidden>
             <label asp-for="@Model.Rol"></label>
