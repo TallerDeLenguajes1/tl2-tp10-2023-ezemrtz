@@ -17,7 +17,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Required(ErrorMessage = "Este campo es requerido.")]
         [StringLength(30)]
         [Display(Name = "Nombre del tablero")]
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = string.Empty;
 
         [StringLength(50)]
         [Display(Name = "Descripción")]

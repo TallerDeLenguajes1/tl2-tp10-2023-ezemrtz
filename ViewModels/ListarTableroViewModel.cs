@@ -13,7 +13,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             Tableros = new List<TableroUsuarioViewModel>();
             TablerosPropios = new List<TableroUsuarioViewModel>();
             TablerosAjenos = new List<TableroUsuarioViewModel>();
-            var userLoguado = usuarios.FirstOrDefault(u => u.Id == idUser);
+            var userLoguado = usuarios.FirstOrDefault(u => u.Id == idUser)!;
             foreach (var t in tablerosPropios)
             {
                 var tableroUsuario = new TableroUsuarioViewModel(t, userLoguado);
@@ -21,7 +21,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             }
             foreach (var t in tablerosAjenos)
             {
-                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario);
+                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario)!;
                 var tableroUsuario = new TableroUsuarioViewModel(t, user);
                 TablerosAjenos.Add(tableroUsuario);
             }
@@ -31,7 +31,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             Tableros = new List<TableroUsuarioViewModel>();
             TablerosPropios = new List<TableroUsuarioViewModel>();
             TablerosAjenos = new List<TableroUsuarioViewModel>();
-            var userLoguado = usuarios.FirstOrDefault(u => u.Id == idUser);
+            var userLoguado = usuarios.FirstOrDefault(u => u.Id == idUser)!;
             foreach (var t in tablerosPropios)
             {
                 var tableroUsuario = new TableroUsuarioViewModel(t, userLoguado);
@@ -42,7 +42,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             }
             foreach (var t in tablerosAjenos)
             {
-                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario);
+                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario)!;
                 var tableroUsuario = new TableroUsuarioViewModel(t, user);
                 TablerosAjenos.Add(tableroUsuario);
 
@@ -51,7 +51,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             }
             foreach (var t in todosTableros)
             {
-                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario);
+                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario)!;
                 var tableroUsuario = new TableroUsuarioViewModel(t, user);
                 Tableros.Add(tableroUsuario);
             }

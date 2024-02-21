@@ -14,9 +14,11 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             {
                 var tablero = listaTableros.FirstOrDefault(t => t.Id == tarea.IdTablero);
                 var usuario = listaUsuarios.FirstOrDefault(u => u.Id == tarea.IdUsuarioAsignado);
-                var TTUViewModel = new TareaTableroUsuarioViewModel(tarea, tablero, usuario);
-                NombreTablero = TTUViewModel.NombreTablero;
-                Tareas.Add(TTUViewModel);
+                if(tablero!=null){
+                    var TTUViewModel = new TareaTableroUsuarioViewModel(tarea, tablero, usuario);
+                    NombreTablero = TTUViewModel.NombreTablero;
+                    Tareas.Add(TTUViewModel);
+                } 
             }
         }
     }

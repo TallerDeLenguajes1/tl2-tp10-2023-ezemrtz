@@ -43,9 +43,9 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 if(filas == 0) throw new Exception("Hubo un problema al modificar el tablero");
             }
         }
-        public List<Tablero>? GetAll(){
+        public List<Tablero> GetAll(){
             var queryString = @"SELECT * FROM Tablero;";
-            List<Tablero> tableros = null;
+            List<Tablero>? tableros = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -58,7 +58,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tablero = new Tablero();
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
-                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Nombre = reader["nombre"].ToString()!;
                         tablero.Descripcion = reader["descripcion"].ToString();
                         tableros.Add(tablero);
                     }
@@ -84,7 +84,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tablero = new Tablero();
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
-                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Nombre = reader["nombre"].ToString()!;
                         tablero.Descripcion = reader["descripcion"].ToString();
                     }
                 }
@@ -110,7 +110,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tablero = new Tablero();
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
-                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Nombre = reader["nombre"].ToString()!;
                         tablero.Descripcion = reader["descripcion"].ToString();
                         tableros.Add(tablero);
                     }
@@ -138,14 +138,14 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tablero = new Tablero();
                         tablero.Id = Convert.ToInt32(reader["id"]);
                         tablero.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
-                        tablero.Nombre = reader["nombre"].ToString();
+                        tablero.Nombre = reader["nombre"].ToString()!;
                         tablero.Descripcion = reader["descripcion"].ToString();
                         tableros.Add(tablero);
                     }
                 }
                 connection.Close();
             }
-            if(tableros == null) throw new Exception("No se encontro ningun tablero");
+            if(tableros == null) throw new Exception("Hubo un problema con la consulta para obtener los tableros con tareas asignadas");
             return (tableros);
         }
         public void Remove(int id){

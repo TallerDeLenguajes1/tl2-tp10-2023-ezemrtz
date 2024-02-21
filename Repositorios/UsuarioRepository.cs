@@ -47,7 +47,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         }
         public List<Usuario> GetAll(){
             var queryString = @"SELECT * FROM Usuario;";
-            List<Usuario> usuarios = null;
+            List<Usuario>? usuarios = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -59,8 +59,8 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                     {
                         var usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(reader["id"]);
-                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
-                        usuario.Contrasenia = reader["contrasenia"].ToString();
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString()!;
+                        usuario.Contrasenia = reader["contrasenia"].ToString()!;
                         usuario.Rol = (NivelAcceso)Convert.ToInt32(reader["rol"]);
                         usuarios.Add(usuario);
                     }
@@ -74,7 +74,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Usuario Get(int id){
             var queryString = "SELECT * FROM Usuario WHERE id = @idUser";
 
-            Usuario usuario = null;
+            Usuario? usuario = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -86,8 +86,8 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(reader["id"]);
-                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
-                        usuario.Contrasenia = reader["contrasenia"].ToString();
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString()!;
+                        usuario.Contrasenia = reader["contrasenia"].ToString()!;
                         usuario.Rol = (NivelAcceso)Convert.ToInt32(reader["rol"]);
                     }
                 }
@@ -100,7 +100,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Usuario GetByNamePassword(string nombre, string contrasenia){
             var queryString = "SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre AND contrasenia = @contrasenia";
 
-            Usuario usuario = null;
+            Usuario? usuario = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -113,8 +113,8 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(reader["id"]);
-                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
-                        usuario.Contrasenia = reader["contrasenia"].ToString();
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString()!;
+                        usuario.Contrasenia = reader["contrasenia"].ToString()!;
                         usuario.Rol = (NivelAcceso)Convert.ToInt32(reader["rol"]);
                     }
                 }
@@ -128,7 +128,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Usuario GetByName(string nombre){
             var queryString = "SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre";
 
-            Usuario usuario = null;
+            Usuario? usuario = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -140,8 +140,8 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                     {
                         usuario = new Usuario();
                         usuario.Id = Convert.ToInt32(reader["id"]);
-                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
-                        usuario.Contrasenia = reader["contrasenia"].ToString();
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString()!;
+                        usuario.Contrasenia = reader["contrasenia"].ToString()!;
                         usuario.Rol = (NivelAcceso)Convert.ToInt32(reader["rol"]);
                     }
                 }

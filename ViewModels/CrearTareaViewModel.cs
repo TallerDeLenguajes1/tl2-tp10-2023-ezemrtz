@@ -11,7 +11,7 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         [Required(ErrorMessage = "Este campo es requerido.")]
         [StringLength(30)]
         [Display(Name = "Nombre de la tarea")]
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = string.Empty;
         
         [StringLength(50)]
         [Display(Name = "Descripción")]
@@ -39,6 +39,8 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
             this.IdUsuarioAsignado = tarea.IdUsuarioAsignado;
             this.Usuarios = usuarios;
         }
-        public CrearTareaViewModel(){}
+        public CrearTareaViewModel(){
+            this.Usuarios = new List<Usuario>();
+        }
     }
 }

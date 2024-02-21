@@ -15,16 +15,18 @@ public class Tablero{
     public string Nombre { get => nombre; set => nombre = value; }
     public string? Descripcion { get => descripcion; set => descripcion = value; }
 
-    public Tablero(){}
+    public Tablero(){
+        this.nombre = string.Empty;
+    }
     public Tablero(CrearTableroViewModel tablero){
-        this.IdUsuarioPropietario = tablero.IdUsuarioPropietario;
-        this.Nombre = tablero.Nombre;
-        this.Descripcion = tablero.Descripcion;
+        this.idUsuarioPropietario = tablero.IdUsuarioPropietario;
+        this.nombre = tablero.Nombre;
+        this.descripcion = tablero.Descripcion;
     }
     public Tablero(ModificarTableroViewModel tablero){
-        this.Id = tablero.Id;
-        this.IdUsuarioPropietario = tablero.IdUsuarioPropietario;
-        this.Nombre = tablero.Nombre;
-        this.Descripcion = tablero.Descripcion;
+        this.id = tablero.Id;
+        this.idUsuarioPropietario = tablero.IdUsuarioPropietario;
+        this.nombre = tablero.Nombre;
+        this.descripcion = tablero.Descripcion;
     }   
 }

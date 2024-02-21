@@ -54,7 +54,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public Tarea Get(int id){
             var queryString = "SELECT * FROM Tarea WHERE id = @id";
 
-            Tarea tarea = null;
+            Tarea? tarea = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -67,7 +67,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         tarea = new Tarea();
                         tarea.Id = Convert.ToInt32(reader["id"]);
                         tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
-                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Nombre = reader["nombre"].ToString()!;
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
@@ -82,7 +82,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public List<Tarea> GetAll(){
             var queryString = "SELECT * FROM Tarea";
 
-            List<Tarea> tareas = null;
+            List<Tarea>? tareas = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -95,7 +95,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tarea = new Tarea();
                         tarea.Id = Convert.ToInt32(reader["id"]);
                         tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
-                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Nombre = reader["nombre"].ToString()!;
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
@@ -105,7 +105,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                 }
                 connection.Close();
             }
-            if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas asociadas a un tablero");
+            if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas");
             return tareas;
         }
 
@@ -133,7 +133,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public List<Tarea> GetByTablero(int idTablero){
             var queryString = "SELECT * FROM Tarea WHERE id_tablero = @idTablero";
 
-            List<Tarea> tareas = null;
+            List<Tarea>? tareas = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -147,7 +147,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tarea = new Tarea();
                         tarea.Id = Convert.ToInt32(reader["id"]);
                         tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
-                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Nombre = reader["nombre"].ToString()!;
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
@@ -163,7 +163,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public List<Tarea> GetByEstado(int estado){
             var queryString = "SELECT * FROM Tarea WHERE estado = @estado";
 
-            List<Tarea> tareas = null;
+            List<Tarea>? tareas = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -177,7 +177,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tarea = new Tarea();
                         tarea.Id = Convert.ToInt32(reader["id"]);
                         tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
-                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Nombre = reader["nombre"].ToString()!;
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();
@@ -193,7 +193,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
         public List<Tarea> GetByUser(int idUsuario){
             var queryString = "SELECT * FROM Tarea WHERE id_usuario_asignado = @idUser";
 
-            List<Tarea> tareas = null;
+            List<Tarea>? tareas = null;
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
@@ -207,7 +207,7 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
                         var tarea = new Tarea();
                         tarea.Id = Convert.ToInt32(reader["id"]);
                         tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
-                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Nombre = reader["nombre"].ToString()!;
                         tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
                         tarea.Descripcion = reader["descripcion"].ToString();
                         tarea.Color = reader["color"].ToString();

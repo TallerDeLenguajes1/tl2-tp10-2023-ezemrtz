@@ -16,15 +16,18 @@ public class Usuario{
     public string Contrasenia { get => contrasenia; set => contrasenia = value; }
     public NivelAcceso Rol { get => rol; set => rol = value; }
 
-    public Usuario(){}
+    public Usuario(){
+        this.nombreDeUsuario = string.Empty;
+        this.contrasenia = string.Empty;
+    }
     public Usuario(CrearUsuarioViewModel usuario){
-        this.NombreDeUsuario = usuario.Nombre;
-        this.Contrasenia = usuario.Contrasenia;
-        this.Rol = usuario.Rol;
+        this.nombreDeUsuario = usuario.Nombre;
+        this.contrasenia = usuario.Contrasenia;
+        this.rol = usuario.Rol;
     }
     public Usuario(ModificarUsuarioViewModel usuario){
-        this.NombreDeUsuario = usuario.Nombre;
-        this.Contrasenia = usuario.Contrasenia;
-        this.Rol = usuario.Rol;
+        this.nombreDeUsuario = usuario.Nombre;
+        this.contrasenia = usuario.Contrasenia;
+        this.rol = usuario.Rol;
     }
 }
