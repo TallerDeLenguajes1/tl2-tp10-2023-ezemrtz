@@ -79,6 +79,35 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
             if(tarea == null) throw new Exception("Tarea no encontrada");
             return (tarea);
         }
+        public List<Tarea> GetAll(){
+            var queryString = "SELECT * FROM Tarea";
+
+            List<Tarea> tareas = null;
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                using(SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    tareas = new List<Tarea>();
+                    while (reader.Read())
+                    {
+                        var tarea = new Tarea();
+                        tarea.Id = Convert.ToInt32(reader["id"]);
+                        tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                        tarea.Nombre = reader["nombre"].ToString();
+                        tarea.Estado = (EstadoTarea)Convert.ToInt32(reader["estado"]);
+                        tarea.Descripcion = reader["descripcion"].ToString();
+                        tarea.Color = reader["color"].ToString();
+                        tarea.IdUsuarioAsignado = reader["id_usuario_asignado"] != DBNull.Value ? Convert.ToInt32(reader["id_usuario_asignado"]) : (int?)null;
+                        tareas.Add(tarea);
+                    }
+                }
+                connection.Close();
+            }
+            if(tareas == null) throw new Exception("Hubo un problema al buscar las tareas asociadas a un tablero");
+            return tareas;
+        }
 
         public int GetIdOwner(int id){
             var queryString = "SELECT * FROM Tarea INNER JOIN Tablero ON(Tablero.id = id_tablero) WHERE Tarea.id = @id";

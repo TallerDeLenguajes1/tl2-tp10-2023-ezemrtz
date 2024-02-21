@@ -60,6 +60,10 @@ public class UsuarioController : Controller
         try
         {
             if(!ModelState.IsValid) return RedirectToAction("CreateUser");
+            if(_usuarioRepository.ExistsByName(usuario.Nombre) ){
+                ViewBag.Mensaje = "El nombre que ingresó ya está en uso.";
+                return View(usuario);
+            }
             _usuarioRepository.Create(new Usuario(usuario));
             return RedirectToAction("Index", usuario);
         }
@@ -91,6 +95,13 @@ public class UsuarioController : Controller
         {
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(!ModelState.IsValid) return RedirectToAction("Index");
+            if(_usuarioRepository.ExistsByName(usuario.Nombre) ){
+                var usuarioByName = _usuarioRepository.GetByName(usuario.Nombre);
+                if(usuarioByName.Id != usuario.Id){
+                    ViewBag.Mensaje = "El nombre que ingresó ya está en uso.";
+                    return View(usuario);
+                }
+            }
             _usuarioRepository.Update(usuario.Id,new Usuario(usuario));
             return RedirectToAction("Index");
         }
@@ -107,16 +118,18 @@ public class UsuarioController : Controller
             if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
             if(!ModelState.IsValid || HttpContext.Session.GetInt32("id") == idUser || !esAdmin()) return RedirectToAction("Error");
             var tableros = _tableroRepository.GetByUser(idUser);
+            bool tareaNull = true;
             foreach (var tab in tableros)
             {
                 var tareas = _tareaRepository.GetByTablero(tab.Id);
+                if(tareas.Count == 0) tareaNull = false;
                 foreach (var tar  in tareas)
                 {
                     _tareaRepository.Remove(tar.Id);
                 }
                 _tableroRepository.Remove(tab.Id);
             }
-            _tareaRepository.DesasignarByUser(idUser);
+            if(!tareaNull)_tareaRepository.DesasignarByUser(idUser);
             _usuarioRepository.Remove(idUser);
             return RedirectToAction("Index");
         }

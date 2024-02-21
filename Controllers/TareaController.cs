@@ -47,6 +47,24 @@ public class TareaController : Controller
             return RedirectToAction("Error");
         }
     }
+    public IActionResult GetTareas(){
+        try
+        {
+            if(!logueado()) return RedirectToRoute(new {controller = "Login", action = "Index"});
+            if(!esAdmin()){
+                var idUser = Convert.ToInt32(HttpContext.Session.GetInt32("id"));
+                var tareasAsignadas = _tareaRepository.GetByUser(idUser);
+                return View(new ListarTareasViewModel(tareasAsignadas, _tableroRepository.GetAll(), _usuarioRepository.GetAll()));
+            }else{
+                return View(new ListarTareasViewModel(_tareaRepository.GetAll(), _tableroRepository.GetAll(), _usuarioRepository.GetAll()));
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return RedirectToAction("Error");
+        }
+    }
 
     [HttpGet]
     public IActionResult CreateTarea(int id){

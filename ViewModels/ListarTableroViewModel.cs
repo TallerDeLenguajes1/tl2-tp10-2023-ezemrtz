@@ -9,15 +9,6 @@ namespace tl2_tp10_2023_ezemrtz.ViewModels
         public List<TableroUsuarioViewModel> TablerosPropios {get;set;}
         public List<TableroUsuarioViewModel> TablerosAjenos {get;set;}
         public List<TableroUsuarioViewModel> Tableros {get;set;}
-        /* public ListarTablerosViewModel(List<Tablero> tableros, List<Usuario> usuarios){
-            Tableros = new List<TableroUsuarioViewModel>();
-            foreach (var t in tableros)
-            {
-                var user = usuarios.FirstOrDefault(u => u.Id == t.IdUsuarioPropietario);
-                var tableroUsuario = new TableroUsuarioViewModel(t, user);
-                Tableros.Add(tableroUsuario);
-            }
-        } */
         public ListarTablerosViewModel(List<Tablero> tablerosPropios, List<Tablero> tablerosAjenos, List<Usuario> usuarios, int idUser){
             Tableros = new List<TableroUsuarioViewModel>();
             TablerosPropios = new List<TableroUsuarioViewModel>();

@@ -124,6 +124,52 @@ namespace tl2_tp10_2023_ezemrtz.Repositorios{
 
             return (usuario);
         }
+
+        public Usuario GetByName(string nombre){
+            var queryString = "SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre";
+
+            Usuario usuario = null;
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@nombre", nombre));
+                using(SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuario = new Usuario();
+                        usuario.Id = Convert.ToInt32(reader["id"]);
+                        usuario.NombreDeUsuario = reader["nombre_de_usuario"].ToString();
+                        usuario.Contrasenia = reader["contrasenia"].ToString();
+                        usuario.Rol = (NivelAcceso)Convert.ToInt32(reader["rol"]);
+                    }
+                }
+                connection.Close();
+            }
+            if(usuario == null) throw new Exception("No existe el usuario");
+            return usuario;
+        }
+
+        public bool ExistsByName(string nombre){
+            var queryString = "SELECT * FROM Usuario WHERE nombre_de_usuario = @nombre";
+
+            using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(queryString, connection);
+                command.Parameters.Add(new SQLiteParameter("@nombre", nombre));
+                using(SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return true;
+                    }
+                }
+                connection.Close();
+            }
+            return false;
+        }
         public void Remove(int id){
             var queryString = "DELETE FROM Usuario WHERE id = @idUser";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))

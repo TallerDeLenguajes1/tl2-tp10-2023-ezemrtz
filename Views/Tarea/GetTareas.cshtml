@@ -4,10 +4,10 @@
 
 @model tl2_tp10_2023_ezemrtz.ViewModels.ListarTareasViewModel
 
-@if(@Model.NombreTablero != null){
-    <h2>Tareas del tablero "@Model.NombreTablero"</h2>
+@if(Context.Session.GetString("rol") == NivelAcceso.operador.ToString()){
+    <h2>Tareas asignadas</h2>
 }else{
-    <h2>El tablero está vacío</h2>
+    <h2>Todas las tareas</h2>
 }
 <table class="table table-striped my-table">
     <thead>
