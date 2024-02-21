@@ -18,7 +18,6 @@
         <th>Estado</th>
         <th>Usuario Asignado</th>
         <th colspan="2">Acciones</th>
-        <th></th>
     </thead>
     <tbody>
         @foreach(var tarea in Model.Tareas){
@@ -26,7 +25,7 @@
                 <td>@tarea.NombreTablero</td>
                 <td>@tarea.NombreTarea</td>
                 <td>@tarea.Descripcion</td>
-                <td>@tarea.Color</td>
+                <td><div style="background-color: @tarea.Color;" class="color-box"></div></td>
                 <td>@tarea.Estado</td>
                 <td>@tarea.NombreUsuarioAsignado</td>
                 @if(@tarea.IdUsuarioPropietario == Context.Session.GetInt32("id") || Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){

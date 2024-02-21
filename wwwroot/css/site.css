@@ -86,4 +86,11 @@ body {
 
 .my-table{
   margin-bottom: 2em;
+  text-align: center;
+}
+
+.color-box{
+  border: 1px solid gray;
+  width: 100%;
+  height: 30px;
 }

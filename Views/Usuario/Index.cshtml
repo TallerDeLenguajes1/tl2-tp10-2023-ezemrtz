@@ -4,7 +4,11 @@
 
 @model tl2_tp10_2023_ezemrtz.ViewModels.ListarUsuariosViewModel
 
-<h2> Lista de Usuarios </h2>
+@if(Context.Session.GetString("rol") == NivelAcceso.administrador.ToString()){
+    <h2> Lista de Usuarios </h2>
+}else{
+    <h2> Mi Perfil </h2>
+}
 <table class="table table-striped my-table">
     <thead>
         <th>Nombre</th>
